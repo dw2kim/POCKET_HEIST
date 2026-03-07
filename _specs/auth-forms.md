@@ -27,7 +27,7 @@
 - Both forms prevent submission when fields are empty
 
 ## Open questions
-- Should the two forms share a single reusable `AuthForm` component, or be kept as separate implementations? Maybe. Use the best practice
+- Should the two forms share a single reusable `AuthForm` component, or be kept as separate implementations? No, let's use two separate implementation
 - Should there be any client-side format validation on the email field (e.g. must contain `@`)? yes
 
 ## Testing Guidelines
