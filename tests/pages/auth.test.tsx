@@ -22,11 +22,13 @@ vi.mock("next/link", () => ({
 
 const mockCreateUser = vi.fn()
 const mockUpdateProfile = vi.fn()
+const mockSignIn = vi.fn()
 
 vi.mock("firebase/auth", () => ({
   getAuth: vi.fn(),
   createUserWithEmailAndPassword: (...args: unknown[]) => mockCreateUser(...args),
   updateProfile: (...args: unknown[]) => mockUpdateProfile(...args),
+  signInWithEmailAndPassword: (...args: unknown[]) => mockSignIn(...args),
 }))
 
 const mockSetDoc = vi.fn()
@@ -65,20 +67,53 @@ describe("LoginPage", () => {
     expect(link).toHaveAttribute("href", "/signup")
   })
 
-  it("logs credentials on valid submit", async () => {
+  it("shows welcome message with codename on successful login", async () => {
+    mockSignIn.mockResolvedValue({
+      user: { displayName: "ShadowFoxHeist" },
+    })
+
     const user = userEvent.setup()
-    const spy = vi.spyOn(console, "log").mockImplementation(() => {})
     render(<LoginPage />)
 
     await user.type(screen.getByLabelText(/email/i), "test@example.com")
     await user.type(screen.getByLabelText(/^password$/i), "secret123")
     await user.click(screen.getByRole("button", { name: /log in/i }))
 
-    expect(spy).toHaveBeenCalledWith({
-      email: "test@example.com",
-      password: "secret123",
+    await waitFor(() => {
+      expect(screen.getByText(/welcome back, shadowfoxheist/i)).toBeInTheDocument()
     })
-    spy.mockRestore()
+  })
+
+  it("shows friendly error on wrong credentials", async () => {
+    mockSignIn.mockRejectedValue({ code: "auth/invalid-credential" })
+
+    const user = userEvent.setup()
+    render(<LoginPage />)
+
+    await user.type(screen.getByLabelText(/email/i), "test@example.com")
+    await user.type(screen.getByLabelText(/^password$/i), "wrong")
+    await user.click(screen.getByRole("button", { name: /log in/i }))
+
+    await waitFor(() => {
+      expect(screen.getByText(/invalid email or password/i)).toBeInTheDocument()
+    })
+  })
+
+  it("calls signInWithEmailAndPassword with correct args", async () => {
+    mockSignIn.mockResolvedValue({
+      user: { displayName: "TestUser" },
+    })
+
+    const user = userEvent.setup()
+    render(<LoginPage />)
+
+    await user.type(screen.getByLabelText(/email/i), "test@example.com")
+    await user.type(screen.getByLabelText(/^password$/i), "secret123")
+    await user.click(screen.getByRole("button", { name: /log in/i }))
+
+    await waitFor(() => {
+      expect(mockSignIn).toHaveBeenCalledWith({}, "test@example.com", "secret123")
+    })
   })
 })
 
