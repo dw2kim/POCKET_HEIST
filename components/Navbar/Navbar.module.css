@@ -1,33 +1,70 @@
 @reference "../../app/globals.css";
 
 .siteNav {
-  @apply bg-light px-2 py-4;
+  @apply bg-light px-3 py-4;
 }
 
 .siteNav nav {
-  @apply mx-auto max-w-6xl flex justify-between items-center;
+  @apply mx-auto flex max-w-6xl items-center justify-between gap-6;
+}
+
+.siteNav header {
+  @apply min-w-0;
 }
 
 .siteNav h1 {
-  @apply font-bold text-xl;
+  @apply text-[2.05rem] font-medium tracking-[-0.04em] leading-none;
+}
+
+.siteNav h1 a {
+  @apply text-heading;
+}
+
+.siteNav header div {
+  @apply mt-1 text-sm text-body;
 }
 
 svg.logo {
   display: inline-block;
 }
 
-.siteNav ul {
-  @apply flex items-center gap-2;
+.actions {
+  @apply flex shrink-0 items-center justify-end gap-3;
 }
 
 .codename {
-  @apply text-body text-sm;
+  @apply text-sm font-medium text-body whitespace-nowrap;
 }
 
 .logoutBtn {
-  @apply text-body cursor-pointer;
+  @apply h-14 min-w-48 cursor-pointer rounded-2xl border border-white/90 bg-transparent px-8 text-[1.85rem] font-medium text-heading transition-colors hover:bg-white/6;
+}
 
-  &:hover {
-    @apply text-heading;
+.createBtn {
+  @apply flex h-14 min-w-72 items-center justify-center rounded-2xl bg-linear-to-r from-[#8f00ff] to-[#ff007c] px-8 text-[1.85rem] font-medium text-heading transition-transform duration-200 hover:scale-[1.01];
+}
+
+@media (max-width: 900px) {
+  .siteNav nav {
+    @apply flex-col items-start;
+  }
+
+  .actions {
+    @apply w-full flex-wrap justify-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .siteNav {
+    @apply px-4 py-3;
+  }
+
+  .siteNav h1 {
+    @apply text-2xl;
+  }
+
+  .logoutBtn,
+  .createBtn {
+    @apply h-11 min-w-0 px-5 text-base;
   }
 }

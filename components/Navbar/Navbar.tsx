@@ -30,20 +30,20 @@ export default function Navbar() {
           </h1>
           <div>Tiny missions. Big office mischief.</div>
         </header>
-        <ul>
-          <li>
-            <Link href="/heists/create" className="btn">Create Heist</Link>
-          </li>
+        <ul className={styles.actions}>
           {user && (
             <>
               <li>
                 <span className={styles.codename}>{user.displayName}</span>
               </li>
               <li>
-                <button onClick={handleLogout} className={styles.logoutBtn}>Log Out</button>
+                <button onClick={handleLogout} className={styles.logoutBtn}>Logout</button>
               </li>
             </>
           )}
+          <li>
+            <Link href="/heists/create" className={styles.createBtn}>Create New Heist</Link>
+          </li>
         </ul>
       </nav>
     </div>

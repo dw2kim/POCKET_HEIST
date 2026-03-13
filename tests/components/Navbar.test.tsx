@@ -35,10 +35,10 @@ describe("Navbar", () => {
     expect(heading).toBeInTheDocument()
   })
 
-  it("renders the Create Heist link", () => {
+  it("renders the Create New Heist link", () => {
     render(<Navbar />)
 
-    const createLink = screen.getByRole("link", { name: /create heist/i })
+    const createLink = screen.getByRole("link", { name: /create new heist/i })
     expect(createLink).toBeInTheDocument()
     expect(createLink).toHaveAttribute("href", "/heists/create")
   })
@@ -46,7 +46,7 @@ describe("Navbar", () => {
   it("does not show logout button when no user is signed in", () => {
     render(<Navbar />)
 
-    expect(screen.queryByRole("button", { name: /log out/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole("button", { name: /logout/i })).not.toBeInTheDocument()
   })
 
   it("shows logout button when user is signed in", () => {
@@ -54,7 +54,7 @@ describe("Navbar", () => {
 
     act(() => authCallback({ displayName: "ShadowFox" }))
 
-    expect(screen.getByRole("button", { name: /log out/i })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: /logout/i })).toBeInTheDocument()
   })
 
   it("shows the user's codename when signed in", () => {
@@ -71,7 +71,7 @@ describe("Navbar", () => {
 
     act(() => authCallback({ displayName: "ShadowFox" }))
 
-    await user.click(screen.getByRole("button", { name: /log out/i }))
+    await user.click(screen.getByRole("button", { name: /logout/i }))
 
     expect(mockSignOut).toHaveBeenCalledWith({})
   })
