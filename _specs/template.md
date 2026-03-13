@@ -1,9 +1,16 @@
 # Spec for <feature-name>
 
-## Functional requirements 
+## Scope
+- What this feature includes: ...
+- What this feature does NOT include: ...
+
+## Functional requirements
 - ...
 
-## Figma design reference (only if referenced) 
+## Dependencies
+- Existing files, routes, components, or services this feature touches: ...
+
+## Figma design reference (only if referenced)
 - File: ...
 - Component name: ...
 - Key visual constraints: ...
@@ -11,15 +18,13 @@
 ## Possible edge cases
 - ...
 
-
-## Acceptance criteria 
+## Acceptance criteria
 - ...
-
 
 ## Open questions
+Mark each as **(blocking)** if it must be answered before implementation, or **(nice-to-have)** if it can be decided later.
 - ...
 
-
-## Testing Guidlines
+## Testing Guidelines
 Create a test file in ./tests folder for the new feature, and create meaningful tests for the following cases without going too heavy:
 - ...

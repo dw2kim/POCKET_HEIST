@@ -1,7 +1,7 @@
 ---
 description: Create a Future Spec File and Branch from a Short Idea 
 argument-hint: Short Future Description 
-allowed-tools: Read, Write, Glob, Bash(git switch:*)
+allowed-tools: Read, Write, Glob, Grep, Bash(git switch:*)
 ---
 
 
@@ -53,11 +53,15 @@ If you cannot infer a sensible `feature_title` and `feature_slug`, ask the user 
 
 Before making any content, switch to a new Git branch using the `branch_name` derived from the `$ARGUMENTS`. If the branch name is already taken, then append a version number to it: e.g. `claude/feature/card-component-01`
 
-## Step 4. Draft the spec content
+## Step 4. Explore the codebase
+
+Before drafting, scan the project for files and patterns related to the feature idea. Look at existing routes, components, utilities, and styles that the new feature would interact with or build on. This grounds the spec in the actual codebase rather than writing in a vacuum — it leads to more accurate functional requirements, better edge cases, and realistic dependency lists.
+
+## Step 5. Draft the spec content
 
 Create a markdown spec document that Plan mode can use directly and save it in the _specs folder using the `feature_slug`. Use the exact structure as defined in the spec template file here: @_specs/template.md. Do not add technical implementation details such as code examples.
 
-## Step 5. Final output to the user
+## Step 6. Final output to the user
 
 After the file is saved, respond to the user with a short summary in this exact format:
 
