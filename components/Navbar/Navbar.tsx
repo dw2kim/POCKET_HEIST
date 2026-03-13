@@ -1,8 +1,23 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { onAuthStateChanged, signOut, User } from "firebase/auth"
 import { Clock8 } from "lucide-react"
 import Link from "next/link"
+import { getClientAuth } from "@/lib/firebase/config"
 import styles from "./Navbar.module.css"
 
 export default function Navbar() {
+  const [user, setUser] = useState<User | null>(null)
+
+  useEffect(() => {
+    return onAuthStateChanged(getClientAuth(), setUser)
+  }, [])
+
+  function handleLogout() {
+    signOut(getClientAuth())
+  }
+
   return (
     <div className={styles.siteNav}>
       <nav>
@@ -19,6 +34,16 @@ export default function Navbar() {
           <li>
             <Link href="/heists/create" className="btn">Create Heist</Link>
           </li>
+          {user && (
+            <>
+              <li>
+                <span className={styles.codename}>{user.displayName}</span>
+              </li>
+              <li>
+                <button onClick={handleLogout} className={styles.logoutBtn}>Log Out</button>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </div>
