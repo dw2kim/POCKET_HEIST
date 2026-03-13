@@ -1,0 +1,21 @@
+@reference "../../globals.css";
+
+.form {
+  @apply flex flex-col gap-4 mt-6 max-w-md mx-auto;
+}
+
+.fieldGroup {
+  @apply flex flex-col gap-1;
+}
+
+.input {
+  @apply bg-lighter text-heading px-4 py-2 rounded-lg border border-body/20 focus:outline-none focus:border-primary;
+}
+
+.error {
+  @apply text-error text-sm text-center;
+}
+
+.link {
+  @apply text-primary hover:text-secondary transition-colors text-center text-sm;
+}
