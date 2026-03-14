@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { onAuthStateChanged, signOut, User } from "firebase/auth"
-import { Clock8 } from "lucide-react"
+import { Clock8, Plus } from "lucide-react"
 import Link from "next/link"
 import { getClientAuth } from "@/lib/firebase/config"
 import styles from "./Navbar.module.css"
@@ -28,7 +28,6 @@ export default function Navbar() {
               cket Heist
             </Link>
           </h1>
-          <div>Tiny missions. Big office mischief.</div>
         </header>
         <ul className={styles.actions}>
           {user && (
@@ -42,7 +41,10 @@ export default function Navbar() {
             </>
           )}
           <li>
-            <Link href="/heists/create" className={styles.createBtn}>Create New Heist</Link>
+            <Link href="/heists/create" className={styles.createBtn}>
+              <Plus size={16} strokeWidth={2.5} />
+              Create New Heist
+            </Link>
           </li>
         </ul>
       </nav>

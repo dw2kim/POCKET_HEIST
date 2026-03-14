@@ -1,27 +1,19 @@
 @reference "../../app/globals.css";
 
 .siteNav {
-  @apply bg-light px-3 py-4;
+  @apply border-b border-[#1e2939] bg-[#101828] px-6;
 }
 
 .siteNav nav {
-  @apply mx-auto flex max-w-6xl items-center justify-between gap-6;
-}
-
-.siteNav header {
-  @apply min-w-0;
+  @apply flex h-16 items-center justify-between gap-6;
 }
 
 .siteNav h1 {
-  @apply text-[2.05rem] font-medium tracking-[-0.04em] leading-none;
+  @apply text-2xl font-medium leading-none tracking-[0.003em] text-white;
 }
 
 .siteNav h1 a {
-  @apply text-heading;
-}
-
-.siteNav header div {
-  @apply mt-1 text-sm text-body;
+  @apply text-white;
 }
 
 svg.logo {
@@ -29,42 +21,27 @@ svg.logo {
 }
 
 .actions {
-  @apply flex shrink-0 items-center justify-end gap-3;
+  @apply flex shrink-0 items-center gap-3;
 }
 
 .codename {
-  @apply text-sm font-medium text-body whitespace-nowrap;
+  @apply text-sm font-medium whitespace-nowrap text-white/60;
 }
 
 .logoutBtn {
-  @apply h-14 min-w-48 cursor-pointer rounded-2xl border border-white/90 bg-transparent px-8 text-[1.85rem] font-medium text-heading transition-colors hover:bg-white/6;
+  @apply h-[38px] w-[127px] cursor-pointer rounded-[10px] border border-white bg-transparent text-base font-normal text-white transition-colors hover:bg-white/10;
 }
 
 .createBtn {
-  @apply flex h-14 min-w-72 items-center justify-center rounded-2xl bg-linear-to-r from-[#8f00ff] to-[#ff007c] px-8 text-[1.85rem] font-medium text-heading transition-transform duration-200 hover:scale-[1.01];
-}
-
-@media (max-width: 900px) {
-  .siteNav nav {
-    @apply flex-col items-start;
-  }
-
-  .actions {
-    @apply w-full flex-wrap justify-start;
-  }
+  @apply flex h-10 items-center justify-center gap-2 rounded-[10px] bg-linear-to-r from-[#9810fa] to-[#e60076] px-4 text-base font-normal text-white transition-transform duration-200 hover:scale-[1.01];
 }
 
 @media (max-width: 640px) {
   .siteNav {
-    @apply px-4 py-3;
+    @apply px-4;
   }
 
-  .siteNav h1 {
-    @apply text-2xl;
-  }
-
-  .logoutBtn,
-  .createBtn {
-    @apply h-11 min-w-0 px-5 text-base;
+  .logoutBtn {
+    @apply w-auto px-4;
   }
 }
