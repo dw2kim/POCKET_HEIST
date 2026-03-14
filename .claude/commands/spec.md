@@ -1,7 +1,7 @@
 ---
 description: Create a Future Spec File and Branch from a Short Idea 
 argument-hint: Short Future Description 
-allowed-tools: Read, Write, Glob, Grep, Bash(git switch:*)
+allowed-tools: Read, Write, Glob, Grep, Bash(git worktree:*), Bash(git branch:*)
 ---
 
 
@@ -19,11 +19,7 @@ Your job will be to turn the user input above into:
 
 Then save the spec file to disk and print a short summary of what you did.
 
-## Step 1. Check the current branch
-
-Check the current Git branch, and abort this entire process if there are any uncommitted, unstaged, or untracked files in the working directory. Tell the user to commit or stash changes before proceeding, and DO NOT GO ANY FURTHER.
-
-## Step 2. Parse the arguments
+## Step 1. Parse the arguments
 
 From `$ARGUMENTS`, extract:
 
@@ -49,24 +45,32 @@ From `$ARGUMENTS`, extract:
 
 If you cannot infer a sensible `feature_title` and `feature_slug`, ask the user to clarify instead of guessing.
 
-## Step 3. Switch to a new Git branch
+## Step 2. Create a Git worktree
 
-Before making any content, switch to a new Git branch using the `branch_name` derived from the `$ARGUMENTS`. If the branch name is already taken, then append a version number to it: e.g. `claude/feature/card-component-01`
+Before making any content, create a Git worktree for the new feature:
 
-## Step 4. Explore the codebase
+1. Check if `branch_name` is already taken (`git branch --list <branch_name>`); if so, append `-01`, `-02`, etc. until a free name is found.
+2. Determine the worktree path as a sibling of the repo root: `../<repo-dirname>-<feature_slug>` (e.g. `../POCKET_HEIST-new-heist-form`).
+3. Run: `git worktree add <worktree_path> -b <branch_name>`
+4. Save `worktree_path` — it will be reported in the final output.
+
+The current working directory is never touched, so there is no need to check for uncommitted changes.
+
+## Step 3. Explore the codebase
 
 Before drafting, scan the project for files and patterns related to the feature idea. Look at existing routes, components, utilities, and styles that the new feature would interact with or build on. This grounds the spec in the actual codebase rather than writing in a vacuum — it leads to more accurate functional requirements, better edge cases, and realistic dependency lists.
 
-## Step 5. Draft the spec content
+## Step 4. Draft the spec content
 
 Create a markdown spec document that Plan mode can use directly and save it in the _specs folder using the `feature_slug`. Use the exact structure as defined in the spec template file here: @_specs/template.md. Do not add technical implementation details such as code examples.
 
-## Step 6. Final output to the user
+## Step 5. Final output to the user
 
 After the file is saved, respond to the user with a short summary in this exact format:
 
-Branch: <branch_name>
-Spec file: specs/<feature_slug>.md
-Title: <feature_title>
+Branch:    <branch_name>
+Worktree:  <worktree_path>
+Spec file: _specs/<feature_slug>.md
+Title:     <feature_title>
 
 Do not repeat the full spec in the chat output unless the user explicitly asks to see it. The main goal is to save the spec file and report where it lives and what branch name to use.
