@@ -32,7 +32,5 @@ Use the following format for making the commit message:
 ## Output:
 
 1. Show summary of changes currently staged
-2. Propose commit message with appropriate emoji
-3. Ask for confirmation before committing
-
-DO NOT auto-commit - wait for user approval, and only commit if the user says so.
+2. Add commit message with appropriate emoji
+3. Do not Ask for confirmation before committing
