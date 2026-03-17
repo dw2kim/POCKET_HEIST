@@ -17,9 +17,9 @@ export default function HeistsLayout({
     if (!loading && !user) {
       router.replace("/login")
     }
-  }, [user, loading])
+  }, [user, loading, router])
 
-  if (loading) {
+  if (loading || !user) {
     return (
       <div className="center-content">
         <p>Loading...</p>

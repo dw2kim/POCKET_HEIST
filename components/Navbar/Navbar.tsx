@@ -1,18 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { onAuthStateChanged, signOut, User } from "firebase/auth"
+import { signOut } from "firebase/auth"
 import { Clock8, Plus } from "lucide-react"
 import Link from "next/link"
 import { getClientAuth } from "@/lib/firebase/config"
+import { useUser } from "@/hooks/useUser"
 import styles from "./Navbar.module.css"
 
 export default function Navbar() {
-  const [user, setUser] = useState<User | null>(null)
-
-  useEffect(() => {
-    return onAuthStateChanged(getClientAuth(), setUser)
-  }, [])
+  const { user } = useUser()
 
   function handleLogout() {
     signOut(getClientAuth())

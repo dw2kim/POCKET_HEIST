@@ -16,9 +16,9 @@ export default function RootLayout({
     if (!loading && user) {
       router.replace("/heists")
     }
-  }, [user, loading])
+  }, [user, loading, router])
 
-  if (loading) {
+  if (loading || user) {
     return (
       <div className="center-content">
         <p>Loading...</p>
