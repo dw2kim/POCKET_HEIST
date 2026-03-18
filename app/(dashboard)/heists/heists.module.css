@@ -1,0 +1,21 @@
+@reference "../../globals.css";
+
+.section {
+  @apply mb-8;
+}
+
+.list {
+  @apply mt-2 space-y-2;
+}
+
+.listItem {
+  @apply rounded-lg bg-lighter px-4 py-3 text-heading;
+}
+
+.emptyMessage {
+  @apply mt-2 text-body italic;
+}
+
+.loadingMessage {
+  @apply mt-2 text-body;
+}

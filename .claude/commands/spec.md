@@ -56,6 +56,25 @@ Before making any content, create a Git worktree for the new feature:
 
 The current working directory is never touched, so there is no need to check for uncommitted changes.
 
+## Step 2.5 Pull Figma context when needed
+
+If `figma_hint` is present and Figma MCP tools are available:
+
+Use the **figma-design-extractor** subagent to provide a design guide for the feature, citing the `figma hint` and tell it to:
+
+1. Extract only information that is useful for implementation, such as:  
+   - Dimensions and layout (grid, spacing, alignment)  
+   - Key typography tokens (font family, size, weight)  
+   - Color tokens and semantic usage (primary, surface, border, error etc.)  
+   - Border radius, shadows, and any notable visual detail
+   - Icons, buttons, links or other UI elements
+2. Summarise this as 3 to 8 concise bullet points and also leave a link to the figma component for future lookups. 
+3. If lookup fails or the tools are not available, record a note like:  
+   - `"Design reference could not be retrieved. See Figma manually for details."`
+
+Always summarise into human friendly notes.
+
+
 ## Step 3. Explore the codebase
 
 Before drafting, scan the project for files and patterns related to the feature idea. Look at existing routes, components, utilities, and styles that the new feature would interact with or build on. This grounds the spec in the actual codebase rather than writing in a vacuum — it leads to more accurate functional requirements, better edge cases, and realistic dependency lists.

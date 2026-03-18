@@ -43,8 +43,8 @@
 - The hook is named `useHeist` and lives at `hooks/useHeist.ts`
 
 ## Open questions
-- Should `"expired"` mode require the user to be logged in at all, given it ignores user filters? **(nice-to-have)** — current route guard already ensures auth, so this is consistent
-- Should the deadline comparison for `"expired"` use a Firestore `where` clause with `Timestamp.now()` or a client-side `new Date()`? **(nice-to-have)** — Firestore `where` with a `Timestamp` is more reliable but requires importing `Timestamp`
+- Should `"expired"` mode require the user to be logged in at all, given it ignores user filters? **(nice-to-have)** — current route guard already ensures auth, so this is consistent. -> Sure
+- Should the deadline comparison for `"expired"` use a Firestore `where` clause with `Timestamp.now()` or a client-side `new Date()`? **(nice-to-have)** — Firestore `where` with a `Timestamp` is more reliable but requires importing `Timestamp` -> use Timestamp.now()
 
 ## Testing Guidelines
 Create a test file in `./tests/hooks/useHeist.test.ts` for the new feature, and create meaningful tests for the following cases without going too heavy:
