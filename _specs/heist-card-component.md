@@ -53,7 +53,7 @@
 - The expired section is unaffected
 
 ## Open questions
-- How many skeleton cards should show per section while loading? **(nice-to-have)** — 3 is a safe default matching the grid column count
+- How many skeleton cards should show per section while loading? 3 cards
 - Should the card have any hover/focus styling? **(nice-to-have)** — a subtle border color lift on hover would match the dark theme; can be added without blocking implementation
 
 ## Testing Guidelines
