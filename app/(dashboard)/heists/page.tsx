@@ -1,15 +1,45 @@
+"use client"
+
+import { useHeist } from "@/hooks/useHeist"
+import type { Heist } from "@/types/firestore"
+import styles from "./heists.module.css"
+
+function HeistList({ heists, loading, emptyMessage }: {
+  heists: Heist[]
+  loading: boolean
+  emptyMessage: string
+}) {
+  if (loading) return <p className={styles.loadingMessage}>Loading...</p>
+  if (heists.length === 0) return <p className={styles.emptyMessage}>{emptyMessage}</p>
+
+  return (
+    <ul className={styles.list}>
+      {heists.map((heist) => (
+        <li key={heist.id} className={styles.listItem}>{heist.title}</li>
+      ))}
+    </ul>
+  )
+}
+
 export default function HeistsPage() {
+  const active = useHeist("active")
+  const assigned = useHeist("assigned")
+  const expired = useHeist("expired")
+
   return (
     <div className="page-content">
-      <div className="active-heists">
+      <section className={styles.section}>
         <h2>Your Active Heists</h2>
-      </div>
-      <div className="assigned-heists">
-        <h2>Heists You've Assigned</h2>
-      </div>
-      <div className="expired-heists">
+        <HeistList heists={active.heists} loading={active.loading} emptyMessage="No active heists right now." />
+      </section>
+      <section className={styles.section}>
+        <h2>Heists You&apos;ve Assigned</h2>
+        <HeistList heists={assigned.heists} loading={assigned.loading} emptyMessage="You haven&apos;t assigned any heists." />
+      </section>
+      <section className={styles.section}>
         <h2>All Expired Heists</h2>
-      </div>
+        <HeistList heists={expired.heists} loading={expired.loading} emptyMessage="No expired heists yet." />
+      </section>
     </div>
   )
 }

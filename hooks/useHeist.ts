@@ -1,0 +1,44 @@
+import { useState, useEffect } from "react"
+import { collection, query, where, onSnapshot, Timestamp } from "firebase/firestore"
+import type { Query } from "firebase/firestore"
+import { getClientDb } from "@/lib/firebase/config"
+import { useUser } from "@/hooks/useUser"
+import { heistConverter, COLLECTIONS } from "@/types/firestore"
+import type { Heist } from "@/types/firestore"
+
+export type HeistMode = "active" | "assigned" | "expired"
+
+function buildQuery(mode: HeistMode, uid: string): Query<Heist> {
+  const col = collection(getClientDb(), COLLECTIONS.HEISTS).withConverter(heistConverter)
+  const now = Timestamp.now()
+
+  switch (mode) {
+    case "active":
+      return query(col, where("assignedTo", "==", uid), where("deadline", ">", now))
+    case "assigned":
+      return query(col, where("createdBy", "==", uid), where("deadline", ">", now))
+    case "expired":
+      return query(col, where("deadline", "<=", now), where("finalStatus", "!=", null))
+  }
+}
+
+export function useHeist(mode: HeistMode): { heists: Heist[], loading: boolean } {
+  const { user, loading: userLoading } = useUser()
+  const [heists, setHeists] = useState<Heist[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (userLoading) return
+    if (mode !== "expired" && !user?.uid) return
+
+    const q = buildQuery(mode, user?.uid ?? "")
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setHeists(snapshot.docs.map((doc) => doc.data()))
+      setLoading(false)
+    })
+
+    return unsubscribe
+  }, [mode, user?.uid, userLoading])
+
+  return { heists, loading }
+}
