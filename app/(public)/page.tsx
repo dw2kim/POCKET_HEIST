@@ -1,24 +1,54 @@
-// this page should be used only as a splash page to decide where a user should be navigated to
-// when logged in --> to /heists
-// when not logged in --> to /login
+import Link from "next/link"
+import { Clock8 } from "lucide-react"
+import { Bebas_Neue } from "next/font/google"
+import styles from "./home.module.css"
 
-import { Clock8 } from "lucide-react";
+const bebas = Bebas_Neue({ subsets: ["latin"], weight: "400" })
 
 export default function Home() {
   return (
-    <div className="center-content">
-      <div className="page-content">
-        <h1>
-          P<Clock8 className="logo" strokeWidth={2.75} />
-          cket Heist
+    <div className={styles.hero}>
+      <div className={styles.grid} />
+      <div className={styles.orb1} />
+      <div className={styles.orb2} />
+
+      <div className={styles.content}>
+        <div className={styles.badge}>
+          <span className={styles.badgeDot} />
+          Mission Active
+        </div>
+
+        <h1 className={`${bebas.className} ${styles.title}`}>
+          P<Clock8 className={styles.clock} strokeWidth={2.5} />cket Heist
         </h1>
-        <div>Mischief, delivered.</div>
-        <p>
-          Welcome to Pocket Heist — the app where you assign sneaky little tasks
-          to your coworkers and watch the chaos unfold. Create a heist, pick
-          your target, set a deadline, and see if they dare complete it.
+
+        <p className={styles.tagline}>Mischief, delivered.</p>
+
+        <p className={styles.description}>
+          Assign sneaky little tasks to your coworkers. Create a heist, pick your mark,
+          set a deadline — then watch the chaos unfold.
         </p>
+
+        <div className={styles.steps}>
+          <div className={styles.step}>
+            <span className={styles.stepNum}>01</span>
+            <span className={styles.stepLabel}>Create a heist</span>
+          </div>
+          <div className={styles.step}>
+            <span className={styles.stepNum}>02</span>
+            <span className={styles.stepLabel}>Pick your target</span>
+          </div>
+          <div className={styles.step}>
+            <span className={styles.stepNum}>03</span>
+            <span className={styles.stepLabel}>Watch chaos unfold</span>
+          </div>
+        </div>
+
+        <div className={styles.actions}>
+          <Link href="/signup" className={styles.btnPrimary}>Get Started</Link>
+          <Link href="/login" className={styles.btnGhost}>Log In</Link>
+        </div>
       </div>
     </div>
-  );
+  )
 }
