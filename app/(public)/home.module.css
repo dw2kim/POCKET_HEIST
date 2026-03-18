@@ -1,0 +1,228 @@
+@reference "../globals.css";
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  @apply bg-dark;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(194, 122, 255, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.orb1 {
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 70%;
+  background: radial-gradient(ellipse, rgba(194, 122, 255, 0.2) 0%, transparent 65%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.orb2 {
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 55%;
+  height: 65%;
+  background: radial-gradient(ellipse, rgba(251, 100, 182, 0.15) 0%, transparent 65%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 3rem 1.5rem;
+  max-width: 680px;
+  width: 100%;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  border: 1px solid rgba(194, 122, 255, 0.25);
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  width: fit-content;
+  background: rgba(194, 122, 255, 0.06);
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.05s;
+}
+
+.badgeDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  flex-shrink: 0;
+  animation: blink 2s ease-in-out infinite;
+}
+
+/* Title */
+.title {
+  font-size: clamp(4rem, 12vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  background: linear-gradient(130deg, #ffffff 0%, var(--color-primary) 50%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.15s;
+}
+
+.clock {
+  display: inline-block;
+  width: 0.78em;
+  height: 0.78em;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 14px rgba(194, 122, 255, 0.65));
+  margin: 0 0.02em;
+}
+
+/* Tagline */
+.tagline {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  @apply text-body;
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.25s;
+}
+
+/* Description */
+.description {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  max-width: 460px;
+  @apply text-body;
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.35s;
+}
+
+/* Steps */
+.steps {
+  display: flex;
+  gap: 0;
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.45s;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-right: 2rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  margin-right: 2rem;
+}
+
+.step:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.stepNum {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+}
+
+.stepLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  @apply text-heading;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  animation: fadeUp 0.5s ease both;
+  animation-delay: 0.55s;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-dark);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btnPrimary:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  @apply text-body;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btnGhost:hover {
+  border-color: rgba(194, 122, 255, 0.35);
+  @apply text-heading;
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
