@@ -2,7 +2,32 @@
 
 import { useHeist } from "@/hooks/useHeist"
 import type { Heist } from "@/types/firestore"
+import HeistCard, { HeistCardSkeleton } from "@/components/HeistCard"
 import styles from "./heists.module.css"
+
+function HeistCardGrid({ heists, loading, emptyMessage }: {
+  heists: Heist[]
+  loading: boolean
+  emptyMessage: string
+}) {
+  if (loading) {
+    return (
+      <div className={styles.grid}>
+        <HeistCardSkeleton />
+        <HeistCardSkeleton />
+        <HeistCardSkeleton />
+      </div>
+    )
+  }
+  if (heists.length === 0) return <p className={styles.emptyMessage}>{emptyMessage}</p>
+  return (
+    <div className={styles.grid}>
+      {heists.map((heist) => (
+        <HeistCard key={heist.id} heist={heist} />
+      ))}
+    </div>
+  )
+}
 
 function HeistList({ heists, loading, emptyMessage }: {
   heists: Heist[]
@@ -30,11 +55,11 @@ export default function HeistsPage() {
     <div className="page-content">
       <section className={styles.section}>
         <h2>Your Active Heists</h2>
-        <HeistList heists={active.heists} loading={active.loading} emptyMessage="No active heists right now." />
+        <HeistCardGrid heists={active.heists} loading={active.loading} emptyMessage="No active heists right now." />
       </section>
       <section className={styles.section}>
         <h2>Heists You&apos;ve Assigned</h2>
-        <HeistList heists={assigned.heists} loading={assigned.loading} emptyMessage="You haven&apos;t assigned any heists." />
+        <HeistCardGrid heists={assigned.heists} loading={assigned.loading} emptyMessage="You haven&apos;t assigned any heists." />
       </section>
       <section className={styles.section}>
         <h2>All Expired Heists</h2>
