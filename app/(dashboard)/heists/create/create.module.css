@@ -1,0 +1,31 @@
+@reference "../../../globals.css";
+
+.form {
+  @apply flex flex-col gap-4 mt-6 max-w-md mx-auto;
+}
+
+.fieldGroup {
+  @apply flex flex-col gap-1;
+}
+
+.input {
+  @apply bg-lighter text-heading px-4 py-2 rounded-lg border border-body/20 focus:outline-none focus:border-primary w-full;
+}
+
+.textarea {
+  @apply bg-lighter text-heading px-4 py-2 rounded-lg border border-body/20 focus:outline-none focus:border-primary w-full;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.select {
+  @apply bg-lighter text-heading px-4 py-2 rounded-lg border border-body/20 focus:outline-none focus:border-primary w-full;
+}
+
+.emptyMessage {
+  @apply text-body text-sm text-center;
+}
+
+.error {
+  @apply text-error text-sm text-center;
+}
