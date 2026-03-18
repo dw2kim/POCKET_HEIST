@@ -19,3 +19,7 @@
 .loadingMessage {
   @apply mt-2 text-body;
 }
+
+.grid {
+  @apply mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
+}
