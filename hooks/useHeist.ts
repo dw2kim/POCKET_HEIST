@@ -10,15 +10,14 @@ export type HeistMode = "active" | "assigned" | "expired"
 
 function buildQuery(mode: HeistMode, uid: string): Query<Heist> {
   const col = collection(getClientDb(), COLLECTIONS.HEISTS).withConverter(heistConverter)
-  const now = Timestamp.now()
 
   switch (mode) {
     case "active":
-      return query(col, where("assignedTo", "==", uid), where("deadline", ">", now))
+      return query(col, where("assignedTo", "==", uid))
     case "assigned":
-      return query(col, where("createdBy", "==", uid), where("deadline", ">", now))
+      return query(col, where("createdBy", "==", uid))
     case "expired":
-      return query(col, where("deadline", "<=", now), where("finalStatus", "!=", null))
+      return query(col, where("deadline", "<=", Timestamp.now()))
   }
 }
 
@@ -31,9 +30,17 @@ export function useHeist(mode: HeistMode): { heists: Heist[], loading: boolean }
     if (userLoading) return
     if (mode !== "expired" && !user?.uid) return
 
+    const now = Timestamp.now()
     const q = buildQuery(mode, user?.uid ?? "")
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      setHeists(snapshot.docs.map((doc) => doc.data()))
+      let results = snapshot.docs.map((doc) => doc.data())
+      if (mode === "active" || mode === "assigned") {
+        results = results.filter((h) => h.deadline > now.toDate())
+      }
+      if (mode === "expired") {
+        results = results.filter((h) => h.finalStatus != null)
+      }
+      setHeists(results)
       setLoading(false)
     })
 
