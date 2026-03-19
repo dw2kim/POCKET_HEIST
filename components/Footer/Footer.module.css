@@ -1,0 +1,51 @@
+@reference "../../app/globals.css";
+
+.siteFooter {
+  @apply border-t border-[#1e2939] bg-[#101828] px-6;
+}
+
+.inner {
+  @apply flex items-center justify-between gap-6 py-6;
+}
+
+.brand {
+  @apply flex flex-col gap-1;
+}
+
+.logo {
+  @apply text-base font-medium leading-none tracking-[0.003em] text-white;
+}
+
+svg.logoIcon {
+  display: inline-block;
+}
+
+.tagline {
+  @apply text-sm text-white/60;
+}
+
+.nav {
+  @apply flex items-center gap-6;
+}
+
+.navLink {
+  @apply text-sm text-white/60 transition-colors hover:text-white;
+}
+
+.copyright {
+  @apply text-sm text-white/60;
+}
+
+@media (max-width: 640px) {
+  .siteFooter {
+    @apply px-4;
+  }
+
+  .inner {
+    @apply flex-col items-start gap-4;
+  }
+
+  .copyright {
+    @apply self-start;
+  }
+}
