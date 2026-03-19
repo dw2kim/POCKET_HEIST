@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Clock, User, UserPen, CalendarClock } from "lucide-react"
 import type { Heist } from "@/types/firestore"
 import { formatTimeRemaining } from "@/utils/formatTimeRemaining"
+import Badge from "@/components/Badge"
 import styles from "./HeistCard.module.css"
 
 interface HeistCardProps {
@@ -24,7 +25,10 @@ export default function HeistCard({ heist }: HeistCardProps) {
         <Link href={`/heists/${heist.id}`} className={styles.title}>
           {heist.title}
         </Link>
-        <Clock className={styles.clockIcon} size={16} strokeWidth={1.75} />
+        <div className={styles.headerRight}>
+          {heist.finalStatus && <Badge variant={heist.finalStatus} />}
+          <Clock className={styles.clockIcon} size={16} strokeWidth={1.75} />
+        </div>
       </div>
 
       <ul className={styles.metaList}>

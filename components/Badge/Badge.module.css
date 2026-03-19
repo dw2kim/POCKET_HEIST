@@ -1,0 +1,25 @@
+@reference "../../app/globals.css";
+
+.badge {
+  @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+}
+
+.success {
+  @apply bg-success/15 text-success;
+}
+
+.failure {
+  @apply bg-error/15 text-error;
+}
+
+.active {
+  @apply bg-primary/15 text-primary;
+}
+
+.assigned {
+  @apply bg-secondary/15 text-secondary;
+}
+
+.expired {
+  @apply bg-white/10 text-white/50;
+}

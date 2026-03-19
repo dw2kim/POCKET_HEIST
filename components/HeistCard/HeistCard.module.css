@@ -12,6 +12,10 @@
   @apply text-base font-normal leading-6 tracking-[-0.31px] text-heading line-clamp-2;
 }
 
+.headerRight {
+  @apply flex shrink-0 items-center gap-2;
+}
+
 .clockIcon {
   @apply shrink-0 text-body;
 }
