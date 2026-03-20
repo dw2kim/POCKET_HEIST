@@ -37,7 +37,7 @@ export interface UpdateHeistInput {
 }
 
 export const heistConverter = {
-  toFirestore: (data: Partial<Heist>): DocumentData => data,
+  toFirestore: (data: Heist): DocumentData => data,
 
   fromFirestore: (snapshot: QueryDocumentSnapshot): Heist =>
     ({
