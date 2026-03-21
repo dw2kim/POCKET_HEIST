@@ -35,10 +35,10 @@ beforeEach(() => {
 })
 
 describe("HeistCard", () => {
-  it("renders the heist title as a link to /heists/[id]", () => {
+  it("renders the card as a link to /heists/[id]", () => {
     render(<HeistCard heist={mockHeist} />)
 
-    const link = screen.getByRole("link", { name: "The Diamond Job" })
+    const link = screen.getByRole("link")
     expect(link).toBeInTheDocument()
     expect(link).toHaveAttribute("href", "/heists/heist-1")
   })

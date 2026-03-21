@@ -20,11 +20,11 @@ export default function HeistCard({ heist }: HeistCardProps) {
   const isOverdue = timeRemaining === "Overdue"
 
   return (
-    <div className={styles.card}>
+    <Link href={`/heists/${heist.id}`} className={styles.card}>
       <div className={styles.cardHeader}>
-        <Link href={`/heists/${heist.id}`} className={styles.title}>
+        <span className={styles.title}>
           {heist.title}
-        </Link>
+        </span>
         <div className={styles.headerRight}>
           {heist.finalStatus && <Badge variant={heist.finalStatus} />}
           <Clock className={styles.clockIcon} size={16} strokeWidth={1.75} />
@@ -57,7 +57,7 @@ export default function HeistCard({ heist }: HeistCardProps) {
           </span>
         </li>
       </ul>
-    </div>
+    </Link>
   )
 }
 
